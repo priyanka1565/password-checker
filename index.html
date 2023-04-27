@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="password" id="password-input" />
+    <p id="password-strength"></p>
+  </body>
+</html>
+<script>
+  const passwordInput = document.getElementById("password-input");
+  const passwordStrength = document.getElementById("password-strength");
+
+  passwordInput.addEventListener("input", function () {
+    const password = passwordInput.value;
+    const strength = checkPasswordStrength(password);
+    passwordStrength.innerText = strength;
+  });
+  function checkPasswordStrength(password) {
+    // Check if password is empty
+    if (password.length === 0) {
+      return "Please enter a password.";
+    }
+
+    // Check if password length is less than 8 characters
+    if (password.length < 8) {
+      return "Password is too weak. Must be at least 8 characters long.";
+    }
+
+    // Check if password contains at least one uppercase letter
+    if (!/[A-Z]/.test(password)) {
+      return "Password is too weak. Must contain at least one uppercase letter.";
+    }
+
+    // Check if password contains at least one lowercase letter
+    if (!/[a-z]/.test(password)) {
+      return "Password is too weak. Must contain at least one lowercase letter.";
+    }
+
+    // Check if password contains at least one number
+    if (!/\d/.test(password)) {
+      return "Password is too weak. Must contain at least one number.";
+    }
+
+    // Check if password contains at least one special character
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+      return "Password is too weak. Must contain at least one special character.";
+    }
+
+    // Password is strong
+    return "Password is strong.";
+  }
+</script>
